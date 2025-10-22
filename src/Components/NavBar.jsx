@@ -13,7 +13,7 @@ const NavBar = () => {
     return (
         <div className=''>
             <MyContainer>
-                <div className="navbar bg-[linear-gradient(to_top,#0ba360,#3cba92)] shadow-sm">
+                <div className="navbar bg-[linear-gradient(to_top,#0fd850_0%,#f9f047_100%)] shadow-sm">
                     <div className="navbar-start">
                         <div className="dropdown">
                             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -33,7 +33,7 @@ const NavBar = () => {
                         </ul>
                     </div>
                     <div className="navbar-end">
-                        <Link to={'/signup'} className="btn bg-white">Sign Up</Link>
+                        <Link to={'/signup'} className="btn bg-[linear-gradient(-60deg,#ff5858_0%,#f09819_100%)] text-white font-bold">Sign Up</Link>
                     </div>
                 </div>
             </MyContainer>

@@ -20,20 +20,20 @@ const Signup = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then(result => {
                 console.log(result.user)
-                toast.success('Sign Up Successful!')
+                toast.success('Sign Up Successful !')
                 // after complete signup user reach Home page
                 navigate('/')
             })
             .catch(error => {
                 console.log('Sign Up Faild', error.message)
-                toast.error('error')
+                toast.error('Error SignUp !')
             })
     }
 
     return (
         <>
             <MyContainer>
-                <div className="hero bg-[linear-gradient(60deg,#abecd6_0%,#fbed96_100%)] mt-10">
+                <div className="hero bg-[linear-gradient(-60deg,#16a085_0%,#f4d03f_100%)] mt-10">
                     <div className="hero-content gap-15 flex-col lg:flex-row">
                         <div className="text-center lg:text-left">
                             <h1 className="text-5xl font-bold text-[#471396]">Sign Up</h1>
@@ -41,7 +41,7 @@ const Signup = () => {
                                 Discover a lush indoor paradise with our carefully curated plants and expert care tips. Transform your home or office into a green sanctuary where every leaf brings life, freshness, and serenity.
                             </p>
                         </div>
-                        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+                        <div className="card bg-[linear-gradient(to_top,#b3ffab_0%,#12fff7_100%)] w-full max-w-sm shrink-0 shadow-2xl">
                             <div className="card-body">
                                 <form onSubmit={handelSignUp}>
                                     <fieldset className="fieldset">
@@ -63,7 +63,7 @@ const Signup = () => {
                                         {/* ALREADY HAVE AN ACCOUNT */}
                                         <div className='flex justify-center gap-2'>
                                             <a className="link link-hover">Already have an account ?</a>
-                                            <Link to='/signin'>SignIn</Link>
+                                            <Link to='/signin' className='text-blue-500 font-bold underline'>SignIn</Link>
                                         </div>
                                     </fieldset>
                                 </form>
