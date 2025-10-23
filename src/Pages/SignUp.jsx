@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MyContainer from '../Components/MyContainer';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../assets/Firebase/firebase.config';
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router';
+import { IoEyeOff } from 'react-icons/io5';
+import { FaEye } from 'react-icons/fa';
 
 const Signup = () => {
+    const [show, setShow] = useState(false)
+
     const navigate = useNavigate()
     // USER SIGN UP 
     const handelSignUp = (event) => {
@@ -46,17 +50,42 @@ const Signup = () => {
                                 <form onSubmit={handelSignUp}>
                                     <fieldset className="fieldset">
                                         {/* USER NAME */}
-                                        <label className="label">Name</label>
-                                        <input type="text" className="input" name='name' placeholder="Name" />
+                                        <div>
+                                            <label className="label">Name</label>
+                                            <input type="text" className="input input-bordered w-full bg-white/20 text-black focus:outline-none focus:ring-2 focus:ring-pink-400" name='name' placeholder="Name" />
+                                        </div>
+
                                         {/* UERS EMAIL */}
-                                        <label className="label">Email</label>
-                                        <input type="email" className="input" name='email' placeholder="Email" />
+                                        <div>
+                                            <label className="label">Email</label>
+                                            <input type="email" className="input input-bordered w-full bg-white/20 text-black focus:outline-none focus:ring-2 focus:ring-pink-400" name='email' placeholder="Email" />
+                                        </div>
+
                                         {/* USER PHOTO */}
-                                        <label className="label">Photo</label>
-                                        <input type="text" className="input" name='photo' placeholder="Photo Link" />
+                                        <div>
+                                            <label className="label">Photo</label>
+                                            <input type="text" className="input input-bordered w-full bg-white/20 text-black focus:outline-none focus:ring-2 focus:ring-pink-400" name='photo' placeholder="Photo Link" />
+                                        </div>
+
                                         {/* USER PASSWORD */}
-                                        <label className="label">Password</label>
-                                        <input type="password" className="input" name='password' placeholder="Password" />
+                                        <div className="relative">
+                                            <label className="block text-sm font-medium mb-1">
+                                                Password
+                                            </label>
+                                            <input
+                                                type={show ? "text" : "password"}
+                                                name="password"
+                                                placeholder="Password"
+                                                className="input input-bordered w-full bg-white/20 text-black focus:outline-none focus:ring-2 focus:ring-pink-400"
+                                            />
+                                            <span
+                                                onClick={() => setShow(!show)}
+                                                className="absolute right-[8px] top-[36px] cursor-pointer z-50"
+                                            >
+                                                {show ? <FaEye /> : <IoEyeOff />}
+                                            </span>
+                                        </div>
+
                                         {/* FORGOT PASSWORD
                                     <div><a className="link link-hover">Forgot password?</a></div> */}
                                         <button className="btn btn-neutral mt-4 bg-[linear-gradient(-60deg,#ff5858_0%,#f09819_100%)] border-none">Register</button>
