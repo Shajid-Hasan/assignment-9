@@ -10,12 +10,26 @@ const Signin = () => {
 
     const [show, setShow] = useState(false)
 
+    const [email, setEmail] = useState(null)
+
     const navigate = useNavigate();
+
     const handelSignIn = (event) => {
         event.preventDefault();
         const email = event.target.email?.value
         const password = event.target.password?.value
         console.log('Sign in function entired', { email, password })
+
+        // IMPLEMENT PASSWORD VALIDATION
+        const regExp = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+        // password valid or not
+        if (!regExp.test(password)) {
+            toast.error(
+                "Password must contain at least one uppercase letter, one lowercase letter, and be at least 6 characters long."
+            );
+            return;
+        }
 
         // SIGN IN WITH EMAIL & PASSWORD FIREBASE AUTHENTICATION
         signInWithEmailAndPassword(auth, email, password)
@@ -30,15 +44,6 @@ const Signin = () => {
                 toast.error("Sign In Error !")
             })
 
-        // IMPLEMENT PASSWORD VALIDATION
-        const hasUppercase = /[A-Z]/.test(password);
-        const hasLowercase = /[a-z]/.test(password);
-        const isValidLength = password.length >= 6;
-
-        if (!hasUppercase || !hasLowercase || !isValidLength) {
-            toast.error("Password must be at least 6 characters, with uppercase and lowercase letters.");
-            return;
-        }
     }
 
     // GOOGLE LOGIN AUTHENTICATION
@@ -58,7 +63,9 @@ const Signin = () => {
     }
 
     // FORGOT PASSWORD
-    const handelForgotPassword = () => {
+    const handelForgotPassword = (e) => {
+        e.preventDefault();
+        console.log("clicked")
         sendPasswordResetEmail(auth, email)
     }
     return (
@@ -95,10 +102,10 @@ const Signin = () => {
 
                             {/* FORGOT PASSWORD */}
                             <div>
-                                <a className="link link-hover">Forgot password?</a>
+                                <Link onClick={handelForgotPassword} onChange={(e) => setEmail(e.target.value)} value={email} className="link link-hover">Forgot password?</Link>
                             </div>
 
-                            <button className="btn btn-neutral text-white font-bold mt-4 bg-[linear-gradient(-60deg,#ff5858_0%,#f09819_100%)] border-none">LogIn</button>
+                            <Link to='/' className="btn btn-neutral text-white font-bold mt-4 bg-[linear-gradient(-60deg,#ff5858_0%,#f09819_100%)] border-none">LogIn</Link>
                             {/* Divider */}
                             <div className="flex items-center justify-center gap-2 my-2">
                                 <div className="h-px w-16 bg-white/30"></div>
@@ -115,7 +122,7 @@ const Signin = () => {
                             {/* DON'T HAVE AN ACCOUNT */}
                             <div className='flex justify-center gap-2 mt-3'>
                                 <a className="link link-hover">Don't have an account ?</a>
-                                <Link to='/signUp' className='text-black-500 font-bold underline'>SignUp</Link>
+                                <Link to='/signup' className='text-black-500 font-bold underline'>SignUp</Link>
                             </div>
                         </fieldset>
                     </form>

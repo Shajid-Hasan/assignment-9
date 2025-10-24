@@ -1,10 +1,12 @@
 import { createBrowserRouter } from "react-router";
 import Home from "../Pages/Home";
-import MyProfile from "../Pages/MyProfile";
 import MainLayout from "../MainLayouts/MainLayout";
 import Plants from "../Components/Plants";
 import Signup from "../Pages/Signup";
 import Signin from "../Pages/Signin";
+import logIn from "../Pages/logIn";
+import LogOut from "../Pages/LogOut";
+import MyProfile from "../Pages/MyProfile";
 
 export const router = createBrowserRouter([
     {
@@ -20,7 +22,7 @@ export const router = createBrowserRouter([
                 Component: Plants
             },
             {
-                path: '/my-profile',
+                path: '/profile',
                 Component: MyProfile
             },
             {
@@ -30,6 +32,14 @@ export const router = createBrowserRouter([
             {
                 path: '/signin',
                 Component: Signin
+            },
+            {
+                path: '/login',
+                Component: logIn
+            },
+            {
+                path: '/logout',
+                Component: LogOut
             }
         ]
     }
