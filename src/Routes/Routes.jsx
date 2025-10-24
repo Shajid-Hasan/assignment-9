@@ -4,7 +4,6 @@ import MainLayout from "../MainLayouts/MainLayout";
 import Plants from "../Components/Plants";
 import Signup from "../Pages/Signup";
 import Signin from "../Pages/Signin";
-import logIn from "../Pages/logIn";
 import LogOut from "../Pages/LogOut";
 import MyProfile from "../Pages/MyProfile";
 
@@ -32,10 +31,6 @@ export const router = createBrowserRouter([
             {
                 path: '/signin',
                 Component: Signin
-            },
-            {
-                path: '/login',
-                Component: logIn
             },
             {
                 path: '/logout',

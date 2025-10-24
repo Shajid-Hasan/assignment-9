@@ -2,8 +2,10 @@ import React from 'react';
 import { Link, NavLink } from 'react-router';
 import MyContainer from './MyContainer';
 import Banner from '../Pages/Banner';
+import { auth } from '../assets/Firebase/firebase.config';
 
 const NavBar = () => {
+    const user = auth.currentUser;
     const links = (
         <>
             <li><NavLink className={({ isActive }) => isActive ? 'text-white font-bold' : ''} to="/">Home</NavLink></li>
@@ -43,7 +45,7 @@ const NavBar = () => {
                         <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full">
-                                    <img alt="User Avatar" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                                    <img alt="User Avatar" src={user?.photoURL || "https://i.ibb.co/4pDNDk1/avatar.png"} />
                                 </div>
                             </div>
                             <ul tabIndex={-1} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">

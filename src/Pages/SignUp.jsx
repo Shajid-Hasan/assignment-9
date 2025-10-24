@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import MyContainer from '../Components/MyContainer';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'; // ✅ NEW: imported updateProfile
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../assets/Firebase/firebase.config';
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router';
@@ -19,7 +19,7 @@ const Signup = () => {
         const photo = event.target.photo?.value;
         const password = event.target.password?.value;
 
-        // ✅ password validation
+        // PASSWORD VALIDATION
         const regExp = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
         if (!regExp.test(password)) {
             toast.error("Password must contain at least one uppercase letter, one lowercase letter, and be at least 6 characters long.");

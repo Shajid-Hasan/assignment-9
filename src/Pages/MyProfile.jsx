@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router";
 
 const MyProfile = () => {
-    const user = auth.currentUser;
+    const user = auth?.currentUser;
     const [loading, setLoading] = useState(false);
     const [showForm, setShowForm] = useState(false);
 
@@ -29,7 +29,7 @@ const MyProfile = () => {
                 toast.success("Profile updated successfully!");
                 e.target.reset();
                 setShowForm(false);
-                setTimeout(() => window.location.reload(), 1000); // Refresh to show new data
+                // setTimeout(() => window.location.reload(), 1000);
             })
             .catch((error) => {
                 toast.error(error.message);
