@@ -3,9 +3,10 @@ import { Link, NavLink } from 'react-router';
 import MyContainer from './MyContainer';
 import { AuthContext } from '../Context/Authentication';
 import { toast } from 'react-toastify';
+import { RingLoader } from 'react-spinners';
 
 const NavBar = () => {
-    const { user, setUser, signOutUserFunc } = useContext(AuthContext);
+    const { user, setUser, signOutUserFunc, loading, setLoading } = useContext(AuthContext);
     console.log(user);
 
     // SIGNOUT
@@ -73,11 +74,11 @@ const NavBar = () => {
 
                     {/* Navbar End */}
                     <div className="navbar-end flex items-center gap-3">
-                        {user ? (
+                        {loading ? <RingLoader color='#FF0000' /> : user ? (
                             <div className="dropdown dropdown-end">
                                 {/* Profile Image */}
                                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                    <div className="w-10 h-13 rounded-full overflow-hidden border-2 border-white shadow-lg">
+                                    <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-white shadow-lg">
                                         <img src={user?.photoURL || "https://via.placeholder.com/150"} alt="User" />
                                     </div>
                                 </label>
@@ -117,21 +118,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-
-
-
-{/* <div className="w-full max-w-md mx-auto bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 shadow-2xl rounded-3xl p-10 text-center text-white">
-    <img
-        src={user?.photoURL || "https://via.placeholder.com/150"}
-        alt="User"
-        className="h-32 w-32 rounded-full mx-auto mb-6 border-4 border-white shadow-2xl"
-    />
-    <h2 className="text-3xl font-bold mb-2">{user?.displayName || "No Name"}</h2>
-    <p className="text-lg mb-6">{user?.email}</p>
-    <button
-        onClick={handelSignOut}
-        className="btn bg-white text-red-500 font-bold hover:bg-gray-100 hover:text-red-600 transition-colors px-8 py-3 rounded-full text-lg"
-    >
-        Sign Out
-    </button>
-</div> */}

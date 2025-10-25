@@ -10,7 +10,7 @@ const Signup = () => {
     const [show, setShow] = useState(false);
     const {
         createUserWithEmailAndPasswordFunc,
-        updateProfileFunc
+        updateProfileFunc,
     } = useContext(AuthContext)
 
     const navigate = useNavigate();
@@ -43,7 +43,7 @@ const Signup = () => {
                 )
                     .then(() => {
                         toast.success('Sign Up Successful & Profile Updated !');
-                        navigate('/profile'); //
+                        navigate('/signin'); //
                     })
                     .catch((error) => {
                         console.log("Profile update failed:", error.message);

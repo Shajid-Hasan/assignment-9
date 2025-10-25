@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { FaEye, FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { IoEyeOff } from 'react-icons/io5';
 import { AuthContext } from '../Context/Authentication';
 
@@ -9,16 +9,17 @@ const Signin = () => {
     // const [user, setUser] = useState(null)
     const [show, setShow] = useState(false)
     const [email, setEmail] = useState(null)
+    const navigate = useNavigate();
 
     const emailRef = useRef(null)
 
     const {
         signInWithEmailAndPasswordFunc,
         signInWithEmailFunc,
-        signOutUserFunc,
         sendPasswordResetEmailFunc,
         user,
-        setUser
+        setUser,
+        setLoading
     } = useContext(AuthContext)
 
 
@@ -54,11 +55,10 @@ const Signin = () => {
         signInWithEmailAndPasswordFunc(email, password)
             .then(result => {
                 console.log(result.user)
+                setLoading(false)
                 setUser(result.user)
                 toast.success("Sign in Successfully !")
-
-                // after complete signIn user reach Home page
-                // navigate('/')
+                navigate('/')
             })
             .catch(error => {
                 console.log(error.message)
@@ -73,6 +73,7 @@ const Signin = () => {
         signInWithEmailFunc()
             .then(result => {
                 console.log(result.user)
+                setLoading(false)
                 toast.success("User LogIn Successfully !")
 
             })

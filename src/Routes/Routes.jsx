@@ -6,6 +6,7 @@ import Signup from "../Pages/Signup";
 import Signin from "../Pages/Signin";
 import LogOut from "../Pages/LogOut";
 import MyProfile from "../Pages/MyProfile";
+import PlantsDetails from "../Pages/PlantsDetails";
 
 export const router = createBrowserRouter([
     {
@@ -19,7 +20,13 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/plants',
-                Component: Plants
+                Component: Plants,
+                loader: () => fetch('/plants.json'),
+            },
+            {
+                path: '/plantsdetails/:id',
+                Component: PlantsDetails,
+                loader: () => fetch('/plants.json'),
             },
             {
                 path: '/profile',
@@ -40,3 +47,5 @@ export const router = createBrowserRouter([
         ]
     }
 ])
+
+
