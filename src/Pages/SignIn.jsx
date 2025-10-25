@@ -4,6 +4,8 @@ import { FaEye, FaGoogle } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router';
 import { IoEyeOff } from 'react-icons/io5';
 import { AuthContext } from '../Context/Authentication';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { auth } from '../assets/Firebase/firebase.config';
 
 const Signin = () => {
     // const [user, setUser] = useState(null)
@@ -15,7 +17,7 @@ const Signin = () => {
 
     const {
         signInWithEmailAndPasswordFunc,
-        signInWithEmailFunc,
+        // signInWithEmailFunc,
         sendPasswordResetEmailFunc,
         user,
         setUser,
@@ -66,11 +68,10 @@ const Signin = () => {
             })
 
     }
-
-    // GOOGLE LOGIN AUTHENTICATION
+    const googleProvider = new GoogleAuthProvider()
     const handelGoogleSignIn = () => {
 
-        signInWithEmailFunc()
+        signInWithPopup(auth, googleProvider)
             .then(result => {
                 console.log(result.user)
                 setLoading(false)
@@ -78,10 +79,29 @@ const Signin = () => {
 
             })
             .catch(error => {
+                console.log(error)
                 console.log(error.message)
                 toast.error('Error SignUp !')
             })
+
     }
+
+    // GOOGLE LOGIN AUTHENTICATION
+    // const handelGoogleSignIn = () => {
+
+    //     signInWithEmailFunc()
+    //         .then(result => {
+    //             console.log(result.user)
+    //             setLoading(false)
+    //             toast.success("User LogIn Successfully !")
+
+    //         })
+    //         .catch(error => {
+    //             console.log(error)
+    //             console.log(error.message)
+    //             toast.error('Error SignUp !')
+    //         })
+    // }
 
     // FORGOT PASSWORD
     const handelForgotPassword = () => {

@@ -37,6 +37,3 @@ const Plants = () => {
 };
 
 export default Plants;
-
-
-// plantName, image, description, price, rating, availableStock, 
