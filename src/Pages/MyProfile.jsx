@@ -29,7 +29,6 @@ const MyProfile = () => {
                 toast.success("Profile updated successfully!");
                 e.target.reset();
                 setShowForm(false);
-                // setTimeout(() => window.location.reload(), 1000);
             })
             .catch((error) => {
                 toast.error(error.message);

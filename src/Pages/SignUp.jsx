@@ -1,22 +1,26 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import MyContainer from '../Components/MyContainer';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth } from '../assets/Firebase/firebase.config';
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router';
 import { IoEyeOff } from 'react-icons/io5';
 import { FaEye } from 'react-icons/fa';
+import { AuthContext } from '../Context/Authentication';
 
 const Signup = () => {
     const [show, setShow] = useState(false);
+    const {
+        createUserWithEmailAndPasswordFunc,
+        updateProfileFunc
+    } = useContext(AuthContext)
+
     const navigate = useNavigate();
 
     // USER SIGN UP 
     const handelSignUp = (event) => {
         event.preventDefault();
-        const name = event.target.name?.value;
+        const displayName = event.target.name?.value;
         const email = event.target.email?.value;
-        const photo = event.target.photo?.value;
+        const photoURL = event.target.photo?.value;
         const password = event.target.password?.value;
 
         // PASSWORD VALIDATION
@@ -26,24 +30,24 @@ const Signup = () => {
             return;
         }
 
-        // ✅ CREATE ACCOUNT
-        createUserWithEmailAndPassword(auth, email, password)
+        // ACCOUNT CREATION
+        createUserWithEmailAndPasswordFunc(email, password)
             .then(result => {
                 const user = result.user;
                 console.log("User created:", user);
 
-                // ✅ Update profile info (name + photo)
-                updateProfile(user, {
-                    displayName: name,
-                    photoURL: photo
-                })
+                // UPDATE PROFILE
+                updateProfileFunc(
+                    displayName,
+                    photoURL,
+                )
                     .then(() => {
-                        toast.success('Sign Up Successful & Profile Updated!');
-                        navigate('/profile'); // ✅ move user to Profile page
+                        toast.success('Sign Up Successful & Profile Updated !');
+                        navigate('/profile'); //
                     })
                     .catch((error) => {
                         console.log("Profile update failed:", error.message);
-                        toast.error("Profile update failed!");
+                        toast.error("Profile update failed !");
                     });
             })
             .catch(error => {
@@ -66,8 +70,11 @@ const Signup = () => {
 
                     <div className="card bg-[linear-gradient(to_top,#b3ffab_0%,#12fff7_100%)] w-full max-w-sm shrink-0 shadow-2xl">
                         <div className="card-body">
+
+                            {/* FORM CREATION */}
                             <form onSubmit={handelSignUp}>
                                 <fieldset className="fieldset">
+
                                     {/* USER NAME */}
                                     <div>
                                         <label className="label">Name</label>
@@ -95,6 +102,8 @@ const Signup = () => {
                                             placeholder="Password"
                                             className="input input-bordered w-full bg-white/20 text-black focus:outline-none focus:ring-2 focus:ring-pink-400"
                                         />
+
+                                        {/* PASSWORD SHOW & HIDE */}
                                         <span
                                             onClick={() => setShow(!show)}
                                             className="absolute right-[8px] top-[36px] cursor-pointer z-50"
@@ -108,7 +117,7 @@ const Signup = () => {
                                         Register
                                     </button>
 
-                                    {/* ALREADY HAVE ACCOUNT */}
+                                    {/* ALREADY HAVE AN ACCOUNT */}
                                     <div className='flex justify-center gap-2 mt-2'>
                                         <span>Already have an account?</span>
                                         <Link to='/signin' className='text-blue-500 font-bold underline'>SignIn</Link>

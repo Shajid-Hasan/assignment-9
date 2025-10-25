@@ -15,31 +15,31 @@ import MyContainer from '../Components/MyContainer';
 const Banner = () => {
     return (
         <MyContainer>
-            <div className="max-w-5xl mx-auto my-10 relative">
+            <div className="">
                 <Swiper
-                    spaceBetween={20}         // space between slides
-                    slidesPerView={1}         // show one slide at a time
-                    loop={true}               // continuous loop
+                    spaceBetween={20}
+                    slidesPerView={1}
+                    loop={true}
                     autoplay={{
-                        delay: 3000,            // auto slide delay
+                        delay: 3300,
                         disableOnInteraction: false,
                     }}
-                    navigation={true}         // next/prev arrows
+                    navigation={true}
                     pagination={{ clickable: true }}
                     modules={[Navigation, Pagination, Autoplay]}
                     className="rounded-xl overflow-hidden shadow-lg"
                 >
                     <SwiperSlide>
-                        <img src={One} alt="Slide 1" className="w-[800px] h-150 object-cover" />
+                        <img src={One} alt="Slide 1" className="w-full h-[800px] object-cover" />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <img src={Two} alt="Slide 2" className="w-full h-150 object-cover" />
+                        <img src={Two} alt="Slide 2" className="w-full h-[800px] object-cover" />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <img src={Three} alt="Slide 3" className="w-full h-150 object-cover" />
+                        <img src={Three} alt="Slide 3" className="w-full h-[800px] object-cover" />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <img src={Four} alt="Slide 4" className="w-full h-150 object-cover" />
+                        <img src={Four} alt="Slide 4" className="w-full h-[800px] object-cover" />
                     </SwiperSlide>
                 </Swiper>
             </div>
